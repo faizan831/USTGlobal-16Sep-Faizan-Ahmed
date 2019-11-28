@@ -1,0 +1,4 @@
+10,kushka,40,N
+11,palao,10,V
+12,chicken,100,N
+13,rice,30,V
