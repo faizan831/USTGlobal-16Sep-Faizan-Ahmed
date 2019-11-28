@@ -1,0 +1,4 @@
+14,fati,40,F
+15,priya,10,F
+16,fahad,100,M
+17,ishtiaq,30,M
