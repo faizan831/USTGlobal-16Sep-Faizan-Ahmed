@@ -1,0 +1,805 @@
+-password : root
+show databases;   to show all databases;
+show tables;   to show all the tables in the database;
+
+                           DDL(DATA_DEFINITION_LANGUAGE)
+CREATE
+	->create table tableName;
+DROP
+	->drop table tableName;
+ALTER
+	->alter table tableName add column columnName dataType;
+	->alter table tableName change column oldColumnName newColumnName dataType;
+	->alter table tableName drop column oldColumnName; 
+RENAME
+	->rename table oldTableName to newTableName;
+TRUNCATE
+	->truncate table table_name;
+
+
+                           DML(DATA_MANIPULATION_LANGUAGE)
+INSERT
+	->insert into tableName(columnName,...N) values(value1....N);
+                               (OR)
+	->insert into tableName values(value1.....N);
+		        (FOR 'N' NO.OF.ROWS)
+	->insert into tableName values(value1....N),(values...N)ect..;
+UPDATE
+	->update tableName set columnName=value;
+DELETE
+	->delete from tableName;
+
+
+			   DQL(DATA_QUERY_LANGUAGE)
+SELECT
+	with the help of SELECT we can perform retieval from the table in the three way
+	->PROJECTION
+		select columnName from tableName;
+	->SELECTION
+	->JOINS
+distinct
+	-> select distinct column_name from table_name;
+	->select distinct deptno from employee;
+
+alias
+	->select column_name as alias_name from table_name;
+	->select bloodgroop as bldgrp from employee;
+
+
+mysql> select *from employee;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
+|   2 | b     |         2 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
+|   3 | c     |         3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   7 | i     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
+|  10 | k     |        10 | 1999-01-10 |   20 | 2019-09-11 | o+         |     10 |  50000 | k@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+10 rows in set (0.00 sec)
+
+where clause	it is only for update ,delete and select.
+		->mysql> update employee set mobile_no=123 where eid=2;
+		->mysql> delete from employee where ename='k';
+mysql> select *from employee;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
+|   2 | b     |       123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
+|   3 | c     |         3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+->Query to display salary=50000
+
+mysql> select salary=50000 from employee;
++--------------+
+| salary=50000 |
++--------------+
+|            0 |
+|            0 |
+|            0 |
+|            0 |
+|            0 |
+|            0 |
+|            0 |
+|            0 |
+|            1 |
++--------------+display salary of 50000
+
+
+->Query to increment the salary of employee by 50000
+
+mysql> select salary+50000 increment from employee;
++-----------+
+| increment |
++-----------+
+|     60000 |
+|     60000 |
+|     60000 |
+|     60000 |
+|     70000 |
+|     70000 |
+|     60000 |
+|     60000 |
+|    100000 |
++-----------+increment salary by 50000
+
+
+->Query to display the annual salary 
+
+mysql> select salary*12 annual_salary from employee;
++---------------+
+| annual_salary |
++---------------+
+|        120000 |
+|        120000 |
+|        120000 |
+|        120000 |
+|        240000 |
+|        240000 |
+|        120000 |
+|        120000 |
+|        600000 |
++---------------+annual salary
+
+
+->Query to display per day salary 
+
+mysql> select salary/30 perday_salary from employee;
++---------------+
+| perday_salary |
++---------------+
+|      333.3333 |
+|      333.3333 |
+|      333.3333 |
+|      333.3333 |
+|      666.6667 |
+|      666.6667 |
+|      333.3333 |
+|      333.3333 |
+|     1666.6667 |
++---------------+perday salary
+
+
+->Query to display the details of employee whose designation is software
+
+mysql> select *from employee where designation ='software';
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+to dispay salary of software
+
+
+->Query to display the employee details who is not in dept no 20
+
+mysql> select *from employee where deptno!=20;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
+|   3 | c     |         3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+to display the employee details except deptno 20
+
+->Query to display the employee details whose salary is above 10000
+
+mysql> select *from employee where salary>10000;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+to display salary greater than 1000
+
+->Query to display the employee details whose age is above 30
+
+mysql> select *from employee where age<30;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
+|   2 | b     |       123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+to display the employees whose age is less than 30
+
+->Query to display employee name ,mobileno,email,salary whose age is greater than 28
+
+mysql> select ename,mobile_no,email,salary from employee where age>=28;
++-------+-----------+-------------+--------+
+| ename | mobile_no | email       | salary |
++-------+-----------+-------------+--------+
+| c     |         3 | c@gmail.com |  10000 |
+| d     |         4 | d@gmail.com |  10000 |
+| e     |         5 | e@gmail.com |  20000 |
++-------+-----------+-------------+--------+
+to display ename ,mobile no, salary and email for employee whose age >=28
+
+->Query to display employee name ,mobileno ,salary and email whose salary is less than 20000
+
+mysql> select ename,mobile_no,email,salary from employee where salary<=20000;
++-------+-----------+-------------+--------+
+| ename | mobile_no | email       | salary |
++-------+-----------+-------------+--------+
+| a     |         1 | a@gmail.com |  10000 |
+| b     |       123 | b@gmail.com |  10000 |
+| c     |         3 | c@gmail.com |  10000 |
+| d     |         4 | d@gmail.com |  10000 |
+| e     |         5 | e@gmail.com |  20000 |
+| f     |         6 | f@gmail.com |  20000 |
+| g     |         7 | i@gmail.com |  10000 |
+| h     |         8 | i@gmail.com |  10000 |
++-------+-----------+-------------+--------+
+to display salary <=2000;
+
+->quary to display who is working in deptno 10 as well as salary is greater than 25000
+
+mysql> select *from employee where deptno=10 && salary>25000;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+mysql> select *from employee where deptno=10 and salary>25000;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+
+->Query to display name salary from the employee table who is working in dept no 10 and 20
+
+mysql> select ename ,salary from employee where deptno =10 and deptno =20;
+Empty set (0.00 sec)
+
+->Query to display employee detail whose designation is tester and age is 25
+
+mysql> select *from employee where designation =' tester 'and age =25;
+Empty set (0.03 sec)
+
+->Query to display all the record of the employee who is working as a tester or having salary more than 40000
+
+mysql> select *from employee where designation ='tester' or salary >40000;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
+|   2 | b     |       123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
+|   3 | c     |         3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+4 rows in set (0.00 sec)
+->Quary to display ename salary age from the employee table who is working in deptno 10 or 40 or 50
+
+mysql> select ename ,salary ,age from employee where deptno= 10 or deptno=40 or deptno=50;
++-------+--------+------+
+| ename | salary | age  |
++-------+--------+------+
+| a     |  10000 |   20 |
+| d     |  10000 |   40 |
+| e     |  20000 |   50 |
+| h     |  10000 |   20 |
+| g     |  50000 |   20 |
++-------+--------+------+
+5 rows in set (0.00 sec)
+
+-> Quary to display  employee detail whose age >25 and bloodgroup is b+;
+
+mysql> select * from employee where age>25 and bloodgroop ='b+';
+Empty set (0.00 sec)
+
+->Quary to display all the record of the employee excluding tester
+
+mysql> select *from employee where not designation ='tester';
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+
+mysql> select *from employee where  designation !='tester';
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+-> Query to display name of all the employee who is working as a HR or tester and salary is greater than 40000
+
+mysql> select ename from employee where designation='hr' or designation ='tester' and salary<40000;
++-------+
+| ename |
++-------+
+| a     |
+| b     |
+| c     |
++-------+
+
+->Query to display all the employee excluding software who are working in deptno 40
+
+
+
+mysql> select *from employee where designation !='software' and deptno =40;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+->Query to display all clerk who are wprking for deptno 10,40
+
+mysql> select *from employee where designation ='clarak' and deptno=10 or deptno=40;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select *from employee where designation ='clarak' and (deptno=10 or deptno=40);
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+special operator
+
+->Query to display all the records of employee who is working under deptno 10,20,40,50
+
+mysql> select *from employee where deptno in(10,20,40,50);
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
+|   2 | b     |       123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+
+->Query to display name of all the employee who is working as a tester ,HR ,softare
+
+
+mysql> select ename from employee where designation in('tester','hr','software');
++-------+
+| ename |
++-------+
+| a     |
+| b     |
+| c     |
+| d     |
+| e     |
++-------+
+
+
+
+
+->Query to display the detail of tester, software ,clerk who are working in deptno 20 or 30 and salary is less than 40000
+
+mysql> select *from employee where designation in('tester','softare','clerk') and deptno in(20,30) and salary<40000;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   2 | b     |       123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
+|   3 | c     |         3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+
+->Query to display all the record of employee excluding who is working as a tester ,admin, software
+
+mysql> select *from employee where designation not in('tester','admin','software');
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+
+->Query to display all the record of employee whose age is 20 ,25,30,40 exclude all the detail of tester and software 
+mysql> select *from employee where designation not in('tester','software') and age in(20,25,30,40);
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+
+->Query to display all the records whose age is between 20 to 30
+
+mysql> select *from employee where age between 20 and 30;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
+|   2 | b     |       123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
+|   3 | c     |         3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+
+->Query to display all the records of employee who were hired during 2017 with the help is between operator
+
+mysql> select *from employee where doj between '2017-01-01' and '2017-12-31';
+Empty set (0.00 sec)
+
+->Query to display all the records of employee excluding whose salary is 25000 to 30000
+
+
+
+mysql> select *from employee where salary not between 25000 and 30000;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
+|   2 | b     |       123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
+|   3 | c     |         3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+
+
+mysql> select *from employee where age is null;
+Empty set (0.03 sec)
+
+mysql> select *from employee where designation is not null;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
+|   2 | b     |       123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
+|   3 | c     |         3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+like operator
+
+->Query to display all the records of the employee whose name starts with b
+
+mysql> select *from employee where ename like 'b%';
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   2 | b     |       123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+
+->Query to display name of the employee whose second charector is i
+
+mysql> select *from employee where ename like '_i%';
+Empty set (0.00 sec)
+
+->Query to display the name of the employee which has atleast two l in there name 
+
+
+mysql> select *from employee where ename like '%l%l%';
+Empty set (0.00 sec)
+
+->Query to display the name of the employee whose name starts with s and ends with p
+
+mysql> select *from employee where ename like 's%p';
+Empty set (0.00 sec)
+
+->Query to display all the record of the employee if the employee name begins with a or s
+
+mysql> select *from employee where ename like '%a'or ename like '%s';
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+->Query to display employee name ,salary who is working in deptno 10,20,30 and job designation starts with s
+
+mysql> select ename ,salary from employee where deptno in(10,20,30) and designation like 't%';
++-------+--------+
+| ename | salary |
++-------+--------+
+| a     |  10000 |
+| b     |  10000 |
+| c     |  10000 |
+| f     |  20000 |
+| g     |  10000 |
++-------+--------+
+
+
+--------------------------------------------------------------Functions------------------------------------------------------
+
+
+mysql> select sum(salary) from employee;
++-------------+
+| sum(salary) |
++-------------+
+|      150000 |
++-------------+
+
+ysql> select max(salary) from employee;
++-------------+
+| max(salary) |
++-------------+
+|       50000 |
++-------------+
+mysql> select min(salary) from employee;
++-------------+
+| min(salary) |
++-------------+
+|       10000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(salary) from employee;
++---------------+
+| count(salary) |
++---------------+
+|             9 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from employee;
++-------------+
+| avg(salary) |
++-------------+
+|  16666.6667 |
++-------------+
+
+
+->Query to display all the result of the employees salaries arranged in decending order
+mysql> select *from employee  order by salary desc;
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
+|   2 | b     |       123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
+|   3 | c     |         3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+						new tabel department            date:- 15/11/2019
+mysql> select *from department;
++--------+-------------+-----------+
+| deptno | dept_name   | location  |
++--------+-------------+-----------+
+|     10 | admin       | bangalore |
+|     20 | operator    | chennai   |
+|     30 | maintanence | mumbai    |
+|     40 | developer   | hydrabad  |
++--------+-------------+-----------+
+
+
+->Query to display all the record of the employee whose date of joining is same as c's date
+
+mysql> select *from employee where doj=(select doj from employee where ename ='c');
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | ename | mobile_no | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|   1 | a     |         1 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |
+|   2 | b     |       123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |
+|   3 | c     |         3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |
+|   4 | d     |         4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |
+|   5 | e     |         5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |
+|   6 | f     |         6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |
+|   7 | g     |         7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |
+|   8 | h     |         8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |
+|   9 | g     |         9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |
++-----+-------+-----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+
+
+->Query to display the second maximum salary
+
++-------------+
+| max(salary) |
++-------------+
+|       20000 |
++-------------+
+
+->Query to display name of the employee who is working in a location which has atleast 'one a' in the location
+
+mysql> select ename from employee where deptno in(select deptno from department where location like '%a%');
++-------+
+| ename |
++-------+
+| a     |
+| b     |
+| c     |
+| d     |
+| f     |
+| g     |
+| h     |
+| g     |
++-------+
+
+
+->Query to display all the record of the employee who is working as developer, admin ,operator
+
+
+mysql> update department set deptno=10 where deptno=101;
+Query OK, 1 row affected (0.11 sec)
+
+->Query to display max salary for each department
+
+mysql> select max(salary) from employee group by deptno;
++-------------+
+| max(salary) |
++-------------+
+|       50000 |
+|       20000 |
+|       10000 |
+|       10000 |
+|       20000 |
++-------------+
+
+->Query to display the highest salary given to software in each department
+
++-------------+
+| max(salary) |
++-------------+
+|       10000 |
+|       20000 |
++-------------+
+
+
+->Query to display deptno which has 2 employee working 
+
+
+mysql> select deptno from employee group by deptno having count(*)>=2;
++--------+
+| deptno |
++--------+
+|     10 |
+|     20 |
+|     30 |
+|     40 |
++--------+
+
+rollback
+
+mysql> insert into products values(4,'brush',30);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select *from products;
++------+--------+---------+
+| pid  | pname  | quality |
++------+--------+---------+
+|    1 | milk   |      40 |
+|    2 | bisket |      20 |
+|    3 | paste  |      10 |
+|    4 | brush  |      30 |
++------+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select *from products;
++------+--------+---------+
+| pid  | pname  | quality |
++------+--------+---------+
+|    1 | milk   |      40 |
+|    2 | bisket |      20 |
+|    3 | paste  |      10 |
++------+--------+---------+
+
+->Query to join two tables using cross join
+
+mysql> SELECT *FROM employee CROSS join department;
++-----+--------+------------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+--------+-------------+-----------+
+| eid | ename  | mobile_no  | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation | deptno | dept_name   | location  |
++-----+--------+------------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+--------+-------------+-----------+
+|   1 | faizan | 2147483647 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |     10 | admin       | bangalore |
+|   1 | faizan | 2147483647 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |     20 | operator    | chennai   |
+|   1 | faizan | 2147483647 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |     30 | maintanence | mumbai    |
+|   1 | faizan | 2147483647 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |     40 | developer   | hydrabad  |
+|   2 | b      |        123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |     10 | admin       | bangalore |
+|   2 | b      |        123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |     20 | operator    | chennai   |
+|   2 | b      |        123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |     30 | maintanence | mumbai    |
+|   2 | b      |        123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |     40 | developer   | hydrabad  |
+|   3 | c      |          3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |     10 | admin       | bangalore |
+|   3 | c      |          3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |     20 | operator    | chennai   |
+|   3 | c      |          3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |     30 | maintanence | mumbai    |
+|   3 | c      |          3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |     40 | developer   | hydrabad  |
+|   4 | d      |          4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |     10 | admin       | bangalore |
+|   4 | d      |          4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |     20 | operator    | chennai   |
+|   4 | d      |          4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |     30 | maintanence | mumbai    |
+|   4 | d      |          4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |     40 | developer   | hydrabad  |
+|   5 | e      |          5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |     10 | admin       | bangalore |
+|   5 | e      |          5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |     20 | operator    | chennai   |
+|   5 | e      |          5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |     30 | maintanence | mumbai    |
+|   5 | e      |          5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |     40 | developer   | hydrabad  |
+|   6 | f      |          6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |     10 | admin       | bangalore |
+|   6 | f      |          6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |     20 | operator    | chennai   |
+|   6 | f      |          6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |     30 | maintanence | mumbai    |
+|   6 | f      |          6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |     40 | developer   | hydrabad  |
+|   7 | g      |          7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |     10 | admin       | bangalore |
+|   7 | g      |          7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |     20 | operator    | chennai   |
+|   7 | g      |          7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |     30 | maintanence | mumbai    |
+|   7 | g      |          7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |     40 | developer   | hydrabad  |
+|   8 | h      |          8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |     10 | admin       | bangalore |
+|   8 | h      |          8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |     20 | operator    | chennai   |
+|   8 | h      |          8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |     30 | maintanence | mumbai    |
+|   8 | h      |          8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |     40 | developer   | hydrabad  |
+|   9 | g      |          9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |     10 | admin       | bangalore |
+|   9 | g      |          9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |     20 | operator    | chennai   |
+|   9 | g      |          9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |     30 | maintanence | mumbai    |
+|   9 | g      |          9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |     40 | developer   | hydrabad  |
++-----+--------+------------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+--------+-------------+-----------+
+
+mysql> select *from employee e inner JOIN department d on e.deptno=d.deptno;
++-----+--------+------------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+--------+-------------+-----------+
+| eid | ename  | mobile_no  | dob        | age  | doj        | bloodgroop | deptno | salary | email       | gender | designation | deptno | dept_name   | location  |
++-----+--------+------------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+--------+-------------+-----------+
+|   1 | faizan | 2147483647 | 1999-01-01 |   20 | 2019-09-11 | o+         |     10 |  10000 | a@gmail.com | male   | tester      |     10 | admin       | bangalore |
+|   2 | b      |        123 | 1999-01-02 |   20 | 2019-09-11 | o-         |     20 |  10000 | b@gmail.com | male   | tester      |     20 | operator    | chennai   |
+|   3 | c      |          3 | 1999-01-03 |   30 | 2019-09-11 | ab+        |     30 |  10000 | c@gmail.com | female | tester      |     30 | maintanence | mumbai    |
+|   4 | d      |          4 | 1999-01-04 |   40 | 2019-09-11 | ab-        |     40 |  10000 | d@gmail.com | female | software    |     40 | developer   | hydrabad  |
+|   5 | e      |          5 | 1999-01-05 |   50 | 2019-09-11 | a+         |     50 |  20000 | e@gmail.com | male   | software    |     50 | clarak      | bangalore |
+|   6 | f      |          6 | 1999-01-06 |   20 | 2019-09-11 | a+         |     20 |  20000 | f@gmail.com | female | techsupport |     20 | operator    | chennai   |
+|   7 | g      |          7 | 1999-01-06 |   20 | 2019-09-11 | o+         |     30 |  10000 | i@gmail.com | female | techsupport |     30 | maintanence | mumbai    |
+|   8 | h      |          8 | 1999-01-08 |   20 | 2019-09-11 | o+         |     40 |  10000 | i@gmail.com | female | clarak      |     40 | developer   | hydrabad  |
+|   9 | g      |          9 | 1999-01-09 |   20 | 2019-09-11 | ab+        |     10 |  50000 | g@gmail.com | male   | developer   |     10 | admin       | bangalore |
++-----+--------+------------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+--------+-------------+-----------+ 
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
