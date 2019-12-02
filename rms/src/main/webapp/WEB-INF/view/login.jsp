@@ -14,7 +14,7 @@
 Email:<br>
 <input type="text" placeholder="enter email" name="email" required="required"><br>
 Password:<br>
-<input type="password" name="password" placeholder="enter Password" required="required"><br>
+<input type="text" name="password" placeholder="enter Password" required="required"><br>
 <button type="submit">Login</button><button type="reset">Reset</button><br>
 <a href="./register">Register Here</a>
 </form>

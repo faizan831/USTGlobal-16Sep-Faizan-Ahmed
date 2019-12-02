@@ -1,6 +1,6 @@
 <%@page import="com.ustglobal.rms.bean.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,25 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="./home">Home</a>
-	<a href="./logout" style="float: right;">Logout</a>
-	<fieldset>
-		<legend>Change Password</legend>
-		<form action="./change Password" method="post">
-			<table>
-				<tr>
-					<td>Password:</td>
-					<td><input type="password" name="password"></td>
-				</tr>
-				<tr>
-					<td>confirm Password:</td>
-					<td><input type="password" name="password"></td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="change"></td>
-				</tr>
-			</table>
-		</form>
-	</fieldset>
+<%User user=(User)session.getAttribute("user"); %>
+
+<form action="./changepassword" method="post" style="margin-left: 450px;margin-top: 100px;">
+Password:<br>
+<input type="text" name="password">
+<button type="submit">change</button>
+</form>
 </body>
 </html>
